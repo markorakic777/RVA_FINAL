@@ -1,0 +1,58 @@
+<div class="container">
+
+    <h3 *ngIf="flag==1"> Dodavanje tima</h3>
+    <h3 *ngIf="flag==2"> Modifikacija tima: {{data.naziv}}</h3>
+    <h3 *ngIf="flag==3"> Brisanje tima: {{data.naziv}}</h3>
+    
+    <form class="mat-dialog-content" #formControl="ngForm">
+    
+    <div class="form">
+    <mat-form-field>
+    <input matInput placeholder="Naziv" [(ngModel)]="data.naziv" name="naziv" [disabled]="flag == 3"/>
+    </mat-form-field>
+    </div>
+    
+    <div class="form">
+        <mat-form-field>
+        <input matInput placeholder="sediste" [(ngModel)]="data.sediste" name="naziv" [disabled]="flag == 3"/>
+        </mat-form-field>
+        </div>
+    
+        <div class="form">
+            <mat-form-field>
+            <input matInput placeholder="osnovan" [(ngModel)]="data.osnovan" name="osnovan" [disabled]="flag == 3" [matDatepicker]="osnovan"/>
+            <mat-datepicker-toggle matSuffix [for]="osnovan"></mat-datepicker-toggle>
+            <mat-datepicker #osnovan></mat-datepicker>    
+        
+        </mat-form-field>
+            </div>    
+       
+         
+
+                <div class="form">
+                    <mat-form-field>
+                      <mat-select [(ngModel)]="data.liga" placeholder="Liga" name="liga" [compareWith]="compareTo"
+                        [disabled]="flag == 3">
+                        <mat-option *ngFor="let liga of lige" [value]="liga">
+                          {{ liga.naziv }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                
+
+    <div class="mat-dialog-actions">
+        <button (click)="add()" [mat-dialog-close]="1"  [disabled]="!formControl.valid" mat-button *ngIf="flag == 1" type="submit">Sacuvaj </button>  
+        <button (click)="update()" [mat-dialog-close]="1" [disabled]="!formControl.valid" mat-button *ngIf="flag == 2" type="submit">Izmeni </button>  
+        <button (click)="delete()" [mat-dialog-close]="1" *ngIf="flag == 3" mat-button type="submit">Obrisi </button>  
+        <button (click)="cancel()" >ponisti </button>  
+    
+    
+    
+            </div>
+    
+    
+    </form>
+    
+    
+    </div>

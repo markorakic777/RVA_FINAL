@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h3 *ngIf="flag==1"> Dodavanje nacionalnosti</h3>
+    <h3 *ngIf="flag==2"> Modifikacija nacionalnosti: {{data.naziv}}</h3>
+    <h3 *ngIf="flag==3"> Brisanje nacionalnosti: {{data.naziv}}</h3>
+    
+    <form class="mat-dialog-content" #formControl="ngForm">
+    
+    <div class="form">
+    <mat-form-field>
+    <input matInput placeholder="Naziv" [(ngModel)]="data.naziv" name="naziv" [disabled]="flag == 3"/>
+    </mat-form-field>
+    </div>
+    
+    <div class="form">
+        <mat-form-field>
+        <input matInput placeholder="skracenica" [(ngModel)]="data.skracenica" name="naziv" [disabled]="flag == 3"/>
+        </mat-form-field>
+        </div>
+    
+    
+    <div class="mat-dialog-actions">
+        <button (click)="add()" [mat-dialog-close]="1"[disabled]="!formControl.valid" mat-button *ngIf="flag == 1" type="submit">Sacuvaj </button>  
+        <button (click)="update()" [mat-dialog-close]="1" [disabled]="!formControl.valid" mat-button *ngIf="flag == 2" type="submit">Izmeni </button>  
+        <button (click)="delete()"  [mat-dialog-close]="1"mat-button *ngIf="flag == 3" type="submit">Obrisi </button>  
+        <button (click)="cancel()" >ponisti </button>  
+    
+    
+    
+            </div>
+    
+    
+    </form>
+    
+    
+    </div>
